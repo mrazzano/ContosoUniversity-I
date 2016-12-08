@@ -1,0 +1,47 @@
+﻿@model ContosoUniversity.Core.Models.Student
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+<p class="error">@ViewBag.ErrorMessage</p>
+<div>
+    <h4>Student</h4>
+    <hr/>
+    @Html.ValidationSummary(true, "", new { @class = "alert alert-danger" })
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.FirstMidName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.FirstMidName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.LastName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.EnrollmentDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.EnrollmentDate)
+        </dd>
+    </dl>
+
+    @using (Html.BeginForm(null, null, FormMethod.Post, new {id = "deleteForm"}))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-group">
+            <input id="btnDelete" type="submit" value="Delete" class="btn btn-default"/>
+        </div>
+        <p>
+            @Html.ActionLink("Back to List", "Index")
+        </p>
+    }
+</div>
+

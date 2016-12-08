@@ -1,0 +1,65 @@
+﻿@model IEnumerable<ContosoUniversity.Core.Models.Course>
+
+@{
+    ViewBag.Title = "Courses";
+}
+
+<h2>Courses</h2>
+
+<p>
+    <a href="@Url.Action("Create")">
+        Create New
+        <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+    </a>
+</p>
+
+@using (Html.BeginForm())
+{
+    <div class="form-inline">
+        @Html.DropDownList("DepartmentId", (IEnumerable<SelectListItem>) ViewBag.SelectedDepartment, "All Departments", new {@class = "form-control"})
+        <button type="submit" value="Filter" class="btn btn-default">
+            <span class="glyphicon glyphicon-search"></span>
+        </button>
+    </div>
+    <br/>
+}
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CourseId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Credits)
+        </th>
+        <th>
+            Department
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CourseId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Credits)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Department.Name)
+            </td>
+            <td>
+                @Html.ActionLink("Details", "Details", new { id = item.CourseId }) |
+                @Html.ActionLink("Edit", "Edit", new { id = item.CourseId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.CourseId })
+            </td>
+        </tr>
+    }
+</table>
